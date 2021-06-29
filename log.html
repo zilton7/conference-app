@@ -18,8 +18,22 @@
         <div class="call-wrap card" style="z-index: 99">
 
             <div class="action-wrap" style="display: flex;justify-content: center; align-items: center;padding:30px;">
-                <div style="display:flex; justify-content:center;align-items:center;background-color:#00554d;height:50px;max-width:200px;min-width:200px;font-size:20px;align-self:center;color:white;margin-right:50px;border-radius:5px;" class="host-meeting">Host</div>
-                <div style="display:flex; justify-content:center;align-items:center;background-color:#00554d;height:50px;max-width:200px;min-width:200px;font-size:20px;align-self:center;color:white;border-radius:5px;" class="join-meeting">Join</div>
+                <div style="display:flex; justify-content:center;align-items:center;background-color:#00554d;height:50px;max-width:200px;min-width:200px;font-size:20px;align-self:center;color:white;margin-right:50px;border-radius:5px;"
+                    class="host-meeting">Host</div>
+                <div style="display:flex; justify-content:center;align-items:center;background-color:#00554d;height:50px;max-width:200px;min-width:200px;font-size:20px;align-self:center;color:white;border-radius:5px;"
+                    class="join-meeting">Join</div>
+            </div>
+
+            <div class="row join-wrap">
+                <form class="col s12"> <a href="log.html"><i class="material-icons prefix">arrow_back</i></a>
+                    <div class="row">
+                        <div class="input-field col s6" style="width: 100%;"> <i
+                                class="material-icons prefix">call_to_action</i> <input id="icon_prefix" type="text"
+                                class="validate join-value"> <label for="icon_prefix">Meeting ID [Without Space]</label>
+                        </div>
+                    </div> <button class="btn waves-effect waves-light teal darken-2 join-submit" type="submit"
+                        name="action">Join<i class="material-icons right">send</i></button>
+                </form>
             </div>
 
         </div>
@@ -31,6 +45,32 @@
     <script src="assets/js/materialize.min.js"></script>
     <script src="assets/js/client.js"></script>
     <script>
+        const hostButton = document.getElementsByClassName('host-meeting')[0];
+        const joinButton = document.getElementsByClassName('join-meeting')[0];
+        const joinSubmitButton = document.getElementsByClassName('join-submit')[0];
+
+
+
+        hostButton.addEventListener("click", () => {
+            let idNumber = Math.floor(Math.random() * 100000000)
+            let meetingUrl = `${window.location.origin}?meetingID=${idNumber}`
+            window.location.replace(meetingUrl);
+        });
+
+        joinButton.addEventListener("click", () => {
+            document.getElementsByClassName('action-wrap')[0].style.display = 'none';
+            document.getElementsByClassName('join-wrap')[0].style.display = 'block';
+
+        });
+
+        joinSubmitButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            var meetingIdValue = document.getElementsByClassName('join-value')[0].value;
+            let meetingUrl = `${window.location.origin}?meetingID=${meetingIdValue}`
+            window.location.replace(meetingUrl);
+
+        });
+
 
 
     </script>
